@@ -1,0 +1,28 @@
+{
+  "version" : 1,
+  "indentation" : {
+    "spaces" : 4
+  },
+  "tabWidth" : 4,
+  "lineLength" : 120,
+  "maximumBlankLines" : 1,
+  "indentConditionalCompilationBlocks" : false,
+  "indentSwitchCaseLabels" : false,
+  "lineBreakBeforeEachArgument" : false,
+  "multiElementCollectionTrailingCommas" : true,
+  "respectsExistingLineBreaks" : true,
+  "fileScopedDeclarationPrivacy" : {
+    "accessLevel" : "private"
+  },
+  "orderedImports" : {
+    "includeConditionalImports" : false,
+    "shouldGroupImports" : true
+  },
+  "rules" : {
+    "AllPublicDeclarationsHaveDocumentation" : true,
+    "UseTripleSlashForDocumentationComments" : true,
+    "NeverUseImplicitlyUnwrappedOptionals" : true,
+    "OrderedImports" : true,
+    "NoBlockComments" : true
+  }
+}

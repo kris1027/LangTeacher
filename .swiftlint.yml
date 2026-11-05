@@ -1,0 +1,91 @@
+# SwiftLint catches code smells and the project's architecture rules.
+# Layout (indentation, wrapping, line length, import order) belongs to
+# `swift format` (see .swift-format), so the overlapping rules are off here.
+
+included:
+  - App
+  - Packages/LangTeacherKit/Sources
+  - Packages/LangTeacherKit/Tests
+
+excluded:
+  - build
+  - Packages/LangTeacherKit/.build
+
+disabled_rules:
+  # Owned by swift format.
+  - line_length
+  - trailing_comma
+  - opening_brace
+  - vertical_parameter_alignment
+  - closure_parameter_position
+  - comma
+
+opt_in_rules:
+  - closure_spacing
+  - contains_over_first_not_nil
+  - empty_count
+  - empty_string
+  - explicit_init
+  - fatal_error_message
+  - first_where
+  - implicitly_unwrapped_optional
+  - last_where
+  - sorted_first_last
+  - toggle_bool
+  - unneeded_parentheses_in_closure_argument
+
+identifier_name:
+  excluded:
+    - db
+    - id
+    - ui
+
+# Architecture rules from AGENTS.md. `match_kinds` limits each rule to real
+# code, so a comment that mentions a module never trips it.
+custom_rules:
+  grdb_only_in_persistence:
+    name: "GRDB stays in Persistence"
+    regex: '^\s*(@testable\s+)?import\s+GRDB\b'
+    match_kinds: [keyword, identifier]
+    excluded: '/(Sources/Persistence|Tests/PersistenceTests)/'
+    message: "Only Persistence imports GRDB. Pass Core value types across the boundary instead."
+    severity: error
+
+  subprocess_only_in_bridge:
+    name: "Subprocess stays in ClaudeBridge"
+    regex: '^\s*(@testable\s+)?import\s+Subprocess\b'
+    match_kinds: [keyword, identifier]
+    excluded: '/(Sources/ClaudeBridge|Tests/ClaudeBridgeTests)/'
+    message: "Only ClaudeBridge imports Subprocess."
+    severity: error
+
+  process_launch_only_in_bridge:
+    name: "Only ClaudeBridge launches a process"
+    regex: '\b(Process|NSTask)\s*\('
+    match_kinds: [identifier]
+    excluded: '/(Sources/ClaudeBridge|Tests/ClaudeBridgeTests)/'
+    message: "Only ClaudeBridge launches a process. Call a Core service protocol instead."
+    severity: error
+
+  features_import_core_only:
+    name: "Features imports Core only"
+    regex: '^\s*(@testable\s+)?import\s+(Persistence|ClaudeBridge|GRDB|Subprocess)\b'
+    match_kinds: [keyword, identifier]
+    included: '/Sources/Features/'
+    message: "Features is presentation and imports Core only. Services arrive through initializers or @Environment."
+    severity: error
+
+  core_is_foundation_only:
+    name: "Core is Foundation only"
+    regex: '^\s*import\s+(SwiftUI|AppKit|Combine|Observation|GRDB|Subprocess|Persistence|ClaudeBridge|Features)\b'
+    match_kinds: [keyword, identifier]
+    included: '/Sources/Core/'
+    message: "Core is the domain: Foundation (and os logging) only."
+    severity: error
+
+  no_build_type_check_in_packages:
+    name: "Packages never check the build type"
+    regex: '^\s*#(if|elseif)\s+.*\bDEBUG\b'
+    included: '/Packages/LangTeacherKit/'
+    message: "Only App/AppEnvironment.swift uses #if DEBUG. Pass the choice in from the composition root."
+    severity: error
