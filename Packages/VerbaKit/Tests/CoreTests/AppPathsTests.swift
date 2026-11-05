@@ -4,10 +4,10 @@ import Testing
 
 struct AppPathsTests {
     @Test func pathsLiveUnderTheRoot() {
-        let root = URL(filePath: "/tmp/langteacher-root", directoryHint: .isDirectory)
+        let root = URL(filePath: "/tmp/verba-root", directoryHint: .isDirectory)
         let paths = AppPaths(root: root)
 
-        #expect(paths.database.lastPathComponent == "langteacher.sqlite")
+        #expect(paths.database.lastPathComponent == "verba.sqlite")
         #expect(paths.database.deletingLastPathComponent().standardizedFileURL == root.standardizedFileURL)
         #expect(paths.claudeWork.lastPathComponent == "claude-work")
         #expect(paths.claudeWork.deletingLastPathComponent().standardizedFileURL == root.standardizedFileURL)

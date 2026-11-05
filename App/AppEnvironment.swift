@@ -26,7 +26,7 @@ final class AppEnvironment {
             return AppEnvironment(paths: paths, database: database)
         } catch {
             Log.app.fault("Launch failed: \(String(describing: error), privacy: .public)")
-            fatalError("LangTeacher could not prepare its data folder: \(error)")
+            fatalError("Verba could not prepare its data folder: \(error)")
         }
     }
 
@@ -34,9 +34,9 @@ final class AppEnvironment {
     /// `#if DEBUG` is reliable here (the app target), not inside the Swift package.
     private static var dataRoot: URL {
         #if DEBUG
-        let folderName = "LangTeacher-Dev"
+        let folderName = "Verba-Dev"
         #else
-        let folderName = "LangTeacher"
+        let folderName = "Verba"
         #endif
         return URL.applicationSupportDirectory.appending(path: folderName, directoryHint: .isDirectory)
     }

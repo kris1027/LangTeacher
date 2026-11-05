@@ -2,10 +2,10 @@ import Foundation
 import os
 
 /// One logger per module. Read them in Console.app or with
-/// `log stream --predicate 'subsystem BEGINSWITH "com.langteacher"'`.
+/// `log stream --predicate 'subsystem BEGINSWITH "com.verba"'`.
 public enum Log {
     /// The bundle ID in the app; a fixed fallback under `swift test`.
-    public static let subsystem = Bundle.main.bundleIdentifier ?? "com.langteacher.app"
+    public static let subsystem = Bundle.main.bundleIdentifier ?? "com.verba.app"
 
     /// App launch and the composition root.
     public static let app = Logger(subsystem: subsystem, category: "app")

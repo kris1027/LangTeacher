@@ -2,7 +2,7 @@
 
 ## Overview
 
-The infrastructure layer for everything the app remembers: one GRDB managed SQLite file at `<data folder>/langteacher.sqlite`. It implements the store protocols declared in `Core` and is the only module that imports GRDB.
+The infrastructure layer for everything the app remembers: one GRDB managed SQLite file at `<data folder>/verba.sqlite`. It implements the store protocols declared in `Core` and is the only module that imports GRDB.
 
 ## Key files
 
