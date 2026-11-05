@@ -21,6 +21,8 @@ xcodebuild -scheme LangTeacher -destination 'platform=macOS' -derivedDataPath bu
 open "build/Build/Products/Debug/LangTeacher Dev.app"
 swift test --package-path Packages/LangTeacherKit
 swift format lint --strict --recursive App Packages/LangTeacherKit/Sources Packages/LangTeacherKit/Tests && swiftlint lint --strict
+swift format --in-place --recursive App Packages/LangTeacherKit/Sources Packages/LangTeacherKit/Tests   # fix layout findings
+git config core.hooksPath .githooks     # once per clone: turns on the pre-commit hook (brew install swiftlint first)
 ```
 
 ## Specs
@@ -46,6 +48,8 @@ Stored in `docs/specs/`, one folder per spec: `docs/specs/NNNN-title/index.md` (
 ## Tooling
 
 Chosen, installed by `/develop tooling`: built in `swift format` (layout) + SwiftLint via Homebrew (smells, custom rules such as no `GRDB`/`Subprocess` import in `Features`). Pre-commit hook runs format check + lint (no tests). CI: not yet; add when a GitHub remote exists.
+
+- Config: `.swift-format` (4 spaces, 120 columns, `///` docs required on every `public` declaration), `.swiftlint.yml` (rules that overlap swift format are off; `custom_rules` enforce the module boundaries above as errors), hook script in `.githooks/pre-commit`. A new boundary rule goes in `.swiftlint.yml` `custom_rules`, scoped with `included`/`excluded` path regexes and `match_kinds` so comments never trip it.
 
 ## Git
 
