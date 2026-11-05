@@ -1,0 +1,77 @@
+name: LangTeacher
+
+options:
+  deploymentTarget:
+    macOS: "26.0"
+  createIntermediateGroups: true
+
+configs:
+  Debug: debug
+  Release: release
+
+packages:
+  LangTeacherKit:
+    path: Packages/LangTeacherKit
+
+targets:
+  LangTeacher:
+    type: application
+    platform: macOS
+    sources:
+      - App
+    dependencies:
+      - package: LangTeacherKit
+        product: Core
+      - package: LangTeacherKit
+        product: Persistence
+      - package: LangTeacherKit
+        product: ClaudeBridge
+      - package: LangTeacherKit
+        product: Features
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: $(PRODUCT_NAME)
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        LSMinimumSystemVersion: $(MACOSX_DEPLOYMENT_TARGET)
+        LSApplicationCategoryType: public.app-category.education
+        NSPrincipalClass: NSApplication
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        SWIFT_STRICT_CONCURRENCY: complete
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        CODE_SIGN_IDENTITY: "-"
+        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM: ""
+        ENABLE_HARDENED_RUNTIME: YES
+        # Xcode 27 drops Hardened Runtime for ad hoc signing unless asked explicitly.
+        OTHER_CODE_SIGN_FLAGS: "--options=runtime"
+        CODE_SIGN_ENTITLEMENTS: App/LangTeacher.entitlements
+        MARKETING_VERSION: 0.1.0
+        CURRENT_PROJECT_VERSION: 1
+      configs:
+        Debug:
+          PRODUCT_BUNDLE_IDENTIFIER: com.langteacher.app.dev
+          PRODUCT_NAME: LangTeacher Dev
+          # Keep Debug code in one binary: Hardened Runtime with ad hoc signing
+          # refuses to load Xcode's separately signed `*.debug.dylib`.
+          ENABLE_DEBUG_DYLIB: NO
+        Release:
+          PRODUCT_BUNDLE_IDENTIFIER: com.langteacher.app
+          PRODUCT_NAME: LangTeacher
+
+schemes:
+  LangTeacher:
+    build:
+      targets:
+        LangTeacher: all
+    run:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
