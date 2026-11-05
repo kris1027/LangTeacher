@@ -15,9 +15,9 @@ if ! command -v swiftlint >/dev/null 2>&1; then
 fi
 
 echo "pre-commit: swift format lint"
-if ! swift format lint --strict --recursive App Packages/LangTeacherKit/Sources Packages/LangTeacherKit/Tests; then
+if ! swift format lint --strict --recursive App Packages/VerbaKit/Sources Packages/VerbaKit/Tests; then
     echo "pre-commit: formatting issues. Fix with:" >&2
-    echo "  swift format --in-place --recursive App Packages/LangTeacherKit/Sources Packages/LangTeacherKit/Tests" >&2
+    echo "  swift format --in-place --recursive App Packages/VerbaKit/Sources Packages/VerbaKit/Tests" >&2
     exit 1
 fi
 

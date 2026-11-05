@@ -15,7 +15,7 @@ public struct AppPaths: Sendable, Equatable {
 
     /// The single SQLite file that holds everything the app remembers.
     public var database: URL {
-        root.appending(path: "langteacher.sqlite", directoryHint: .notDirectory)
+        root.appending(path: "verba.sqlite", directoryHint: .notDirectory)
     }
 
     /// The empty folder every `claude` CLI call runs in, so lessons never touch your files.

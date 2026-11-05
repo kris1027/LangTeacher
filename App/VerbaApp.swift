@@ -2,7 +2,7 @@ import Features
 import SwiftUI
 
 @main
-struct LangTeacherApp: App {
+struct VerbaApp: App {
     /// Built once at launch: prepares the data folder and opens the database
     /// before any screen reads from it.
     private let environment = AppEnvironment.launch()

@@ -1,4 +1,4 @@
-# Scope: LangTeacher
+# Scope: Verba
 
 A macOS app that teaches any language with Claude as the teacher. You pick your native language and the language you want to learn, and every lesson, explanation, and correction comes in your native language. Everything runs on your Mac (no server): Claude is reached through the local Claude Code CLI, and your lessons, progress, and learner memory are saved on the machine. Built for personal use first, free.
 
@@ -45,7 +45,7 @@ Every feature that creates or grades learning material follows these. `/architec
 ### 1. Stack & architecture · Beta · in-progress
 Decide how the native macOS app is built and where its data lives on disk, then scaffold a runnable app every slice builds on.
 **Done when:** the stack is recorded in a spec, and an empty app window builds and launches on the Mac.
-spec [0001](../specs/0001-stack-architecture/index.md) · code in `App/`, `Packages/LangTeacherKit/`, `project.yml`
+spec [0001](../specs/0001-stack-architecture/index.md) · code in `App/`, `Packages/VerbaKit/`, `project.yml`
 - [x] Decide the stack (spec): `/architect stack & architecture`
 - [x] Scaffold from the decision: `/develop stack & architecture`
 

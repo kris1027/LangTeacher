@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "LangTeacherKit",
+    name: "VerbaKit",
     platforms: [.macOS(.v26)],
     products: [
         .library(name: "Core", targets: ["Core"]),

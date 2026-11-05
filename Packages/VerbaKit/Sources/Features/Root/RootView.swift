@@ -20,7 +20,7 @@ public struct RootView: View {
                 ContentUnavailableView(selection.title, systemImage: selection.systemImage)
                     .navigationTitle(selection.title)
             } else {
-                ContentUnavailableView("LangTeacher", systemImage: "character.book.closed")
+                ContentUnavailableView("Verba", systemImage: "character.book.closed")
             }
         }
     }

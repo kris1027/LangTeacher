@@ -1,4 +1,4 @@
-name: LangTeacher
+name: Verba
 
 options:
   deploymentTarget:
@@ -10,23 +10,23 @@ configs:
   Release: release
 
 packages:
-  LangTeacherKit:
-    path: Packages/LangTeacherKit
+  VerbaKit:
+    path: Packages/VerbaKit
 
 targets:
-  LangTeacher:
+  Verba:
     type: application
     platform: macOS
     sources:
       - App
     dependencies:
-      - package: LangTeacherKit
+      - package: VerbaKit
         product: Core
-      - package: LangTeacherKit
+      - package: VerbaKit
         product: Persistence
-      - package: LangTeacherKit
+      - package: VerbaKit
         product: ClaudeBridge
-      - package: LangTeacherKit
+      - package: VerbaKit
         product: Features
     info:
       path: App/Info.plist
@@ -48,25 +48,25 @@ targets:
         ENABLE_HARDENED_RUNTIME: YES
         # Xcode 27 drops Hardened Runtime for ad hoc signing unless asked explicitly.
         OTHER_CODE_SIGN_FLAGS: "--options=runtime"
-        CODE_SIGN_ENTITLEMENTS: App/LangTeacher.entitlements
+        CODE_SIGN_ENTITLEMENTS: App/Verba.entitlements
         MARKETING_VERSION: 0.1.0
         CURRENT_PROJECT_VERSION: 1
       configs:
         Debug:
-          PRODUCT_BUNDLE_IDENTIFIER: com.langteacher.app.dev
-          PRODUCT_NAME: LangTeacher Dev
+          PRODUCT_BUNDLE_IDENTIFIER: com.verba.app.dev
+          PRODUCT_NAME: Verba Dev
           # Keep Debug code in one binary: Hardened Runtime with ad hoc signing
           # refuses to load Xcode's separately signed `*.debug.dylib`.
           ENABLE_DEBUG_DYLIB: NO
         Release:
-          PRODUCT_BUNDLE_IDENTIFIER: com.langteacher.app
-          PRODUCT_NAME: LangTeacher
+          PRODUCT_BUNDLE_IDENTIFIER: com.verba.app
+          PRODUCT_NAME: Verba
 
 schemes:
-  LangTeacher:
+  Verba:
     build:
       targets:
-        LangTeacher: all
+        Verba: all
     run:
       config: Debug
     profile:
